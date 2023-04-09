@@ -88,10 +88,39 @@
           >
             <el-input
               v-model="ruleForm.price"
-              placeholder="请设置图书价格"
+              placeholder="请设置图书定价"
             />
           </el-form-item>
+		  <el-form-item
+		    label="作者:"
+		    prop="author"
+		  >
+		    <el-input
+		      v-model="ruleForm.author"
+		      placeholder="请输入作者信息"
+		    />
+		  </el-form-item>
         </div>
+		<div>
+		  <el-form-item
+		    label="出版社:"
+		    prop="publisher"
+		  >
+		    <el-input
+		      v-model="ruleForm.publisher"
+		      placeholder="请输入出版社名称"
+		    />
+		  </el-form-item>
+		  <el-form-item
+		    label="ISBN:"
+		    prop="ISBN"
+		  >
+		    <el-input
+		      v-model="ruleForm.ISBN"
+		      placeholder="请输入ISBN图书号"
+		    />
+		  </el-form-item>
+		</div>
         <el-form-item label="图书标签:">
           <el-form-item>
             <div class="tagBox">
@@ -278,6 +307,9 @@
               'code': '',
               'image': '',
               'description': '',
+			  'author':'',
+			  'publisher':'',
+			  'ISBN':'',
               'bookTags': [],
               'status': true,
               categoryId: ''
@@ -387,7 +419,7 @@
             }
           },
 
-          // 获取菜品分类
+          // 获取图书分类
           getbookList () {
             getCategoryList({ 'type': 1 }).then(res => {
               if (res.code === 1) {
@@ -506,7 +538,7 @@
           handleAvatarSuccess (response, file, fileList) {
             // 拼接down接口预览
             if(response.code === 0 && response.msg === '未登录'){
-              window.top.location.href = '/backend/page/login/login.html'
+              window.top.location.href = '/html/login/login.html'
             }else{
               this.imageUrl = `/common/download?name=${response.data}`
               this.ruleForm.image = response.data
@@ -533,7 +565,7 @@
           goBack(){
             window.parent.menuHandle({
               id: '4',
-              url: '/backend/page/book/list.html',
+              url: '/html/book/list.html',
               name: '图书管理'
             },false)
           }

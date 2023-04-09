@@ -8,4 +8,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
+    @Override
+    public void deleteCategory(Long id) {
+
+
+    }
 }
