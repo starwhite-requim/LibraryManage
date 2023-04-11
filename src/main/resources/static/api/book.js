@@ -1,48 +1,48 @@
 // 查询列表接口
-const getDishPage = (params) => {
+const getBookPage = (params) => {
   return $axios({
-    url: '/dish/page',
+    url: '/book/page',
     method: 'get',
     params
   })
 }
 
 // 删除接口
-const deleteDish = (ids) => {
+const deleteBook = (ids) => {
   return $axios({
-    url: '/dish',
+    url: '/book',
     method: 'delete',
     params: { ids }
   })
 }
 
 // 修改接口
-const editDish = (params) => {
+const editBook = (params) => {
   return $axios({
-    url: '/dish',
+    url: '/book',
     method: 'put',
     data: { ...params }
   })
 }
 
 // 新增接口
-const addDish = (params) => {
+const addBook = (params) => {
   return $axios({
-    url: '/dish',
+    url: '/book',
     method: 'post',
     data: { ...params }
   })
 }
 
 // 查询详情
-const queryDishById = (id) => {
+const queryBookById = (id) => {
   return $axios({
-    url: `/dish/${id}`,
+    url: `/book/${id}`,
     method: 'get'
   })
 }
 
-// 获取菜品分类列表
+// 获取书籍分类列表
 const getCategoryList = (params) => {
   return $axios({
     url: '/category/list',
@@ -51,10 +51,10 @@ const getCategoryList = (params) => {
   })
 }
 
-// 查菜品列表的接口
-const queryDishList = (params) => {
+// 查书籍列表的接口
+const queryBookList = (params) => {
   return $axios({
-    url: '/dish/list',
+    url: '/book/list',
     method: 'get',
     params
   })
@@ -73,9 +73,9 @@ const commonDownload = (params) => {
 }
 
 // 起售停售---批量起售停售接口
-const dishStatusByStatus = (params) => {
+const bookStatusByStatus = (params) => {
   return $axios({
-    url: `/dish/status/${params.status}`,
+    url: `/book/status/${params.status}`,
     method: 'post',
     params: { ids: params.id }
   })

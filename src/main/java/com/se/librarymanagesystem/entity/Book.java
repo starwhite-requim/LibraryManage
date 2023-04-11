@@ -14,7 +14,7 @@ public class Book implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     Long id;
     String name;
-    String ISBN;
+    String isbn;
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     Long categoryId;
 

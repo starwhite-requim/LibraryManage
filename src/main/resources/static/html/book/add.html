@@ -39,7 +39,7 @@
       font-size: 14px;
     }
 
-    #food-add-app .uploadImg .el-form-item__label::before{
+    #book-add-app .uploadImg .el-form-item__label::before{
           content: '*';
           color: #F56C6C;
           margin-right: 4px;
@@ -48,7 +48,7 @@
   </style>
 </head>
 <body>
-   <div class="addBrand-container" id="food-add-app">
+   <div class="addBrand-container" id="book-add-app">
     <div class="container">
       <el-form
         ref="ruleForm"
@@ -282,10 +282,10 @@
     <script src="../../js/request.js"></script>
     <script src="../../js/validate.js"></script>
     <script src="../../js/index.js"></script>
-    <script src="../../api/food.js"></script>
+    <script src="../../api/book.js"></script>
     <script>
       new Vue({
-        el: '#food-add-app',
+        el: '#book-add-app',
         data() {
           return {
             id: '',
@@ -321,15 +321,15 @@
           rules () {
             return {
               'name': [
-                {'required': true, 'message': '请填写菜品名称', 'trigger': 'blur'}
+                {'required': true, 'message': '请填写图书名称', 'trigger': 'blur'}
               ],
               'categoryId': [
-                {'required': true, 'message': '请选择菜品分类', 'trigger': 'change'}
+                {'required': true, 'message': '请选择图书分类', 'trigger': 'change'}
               ],
               'price': [
                 {
                   'required': true,
-                  // 'message': '请填写菜品价格',
+                  // 'message': '请填写图书价格',
                   validator: (rules, value, callback) => {
                     if (!value) {
                       callback(new Error('请填写图书定价'))
@@ -489,7 +489,7 @@
                 }
                 if (this.actionType == 'add') {
                   delete params.id
-                  addbook(params).then(res => {
+                  addBook(params).then(res => {
                     if (res.code === 1) {
                       this.$message.success('图书添加成功！')
                       if (!st) {
@@ -518,7 +518,7 @@
                   })
                 } else {
                   delete params.updateTime
-                  editbook(params).then(res => {
+                  editBook(params).then(res => {
                     if (res.code === 1) {
                       this.$message.success('图书信息修改成功！')
                       this.goBack()

@@ -20,3 +20,5 @@ mybatis-plus:
 
 server:
   port: 8088
+common:
+  baseURL: D:\毕业设计\LibraryManageSystem\src\main\resources\static\uploadImage
