@@ -113,10 +113,10 @@
 		  </el-form-item>
 		  <el-form-item
 		    label="ISBN:"
-		    prop="ISBN"
+		    prop="isbn"
 		  >
 		    <el-input
-		      v-model="ruleForm.ISBN"
+		      v-model="ruleForm.isbn"
 		      placeholder="请输入ISBN图书号"
 		    />
 		  </el-form-item>
@@ -309,7 +309,7 @@
               'description': '',
 			  'author':'',
 			  'publisher':'',
-			  'ISBN':'',
+			  'isbn':'',
               'bookTags': [],
               'status': true,
               categoryId: ''
@@ -366,7 +366,7 @@
         },
         methods: {
           async init () {
-            querybookById(this.id).then(res => {
+            queryBookById(this.id).then(res => {
               console.log(res)
               if (String(res.code) === '1') {
                 this.ruleForm = { ...res.data }

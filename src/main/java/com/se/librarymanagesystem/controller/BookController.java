@@ -66,8 +66,9 @@ public class BookController {
         return R.success(pageInfo);
     }
 
-    @GetMapping("#{id}")
+    @GetMapping("/{id}")
     public R<BookDto> getBookInfo(@PathVariable Long id){
-        return null;
+        BookDto bookDto = bookService.queryBookAndTag(id);
+        return R.success(bookDto);
     }
 }
