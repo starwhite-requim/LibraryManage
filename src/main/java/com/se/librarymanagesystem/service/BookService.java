@@ -6,4 +6,8 @@ import com.se.librarymanagesystem.entity.Book;
 
 public interface BookService extends IService<Book> {
     public BookDto queryBookAndTag(Long id);
+
+    public void addWithTags(BookDto bookDto);
+
+    public void updateWithTags(BookDto bookDto);
 }

@@ -12,11 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,9 +64,85 @@ public class BookController {
         return R.success(pageInfo);
     }
 
+    /**
+     * 传入ID ，返回相应id的DTO类
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public R<BookDto> getBookInfo(@PathVariable Long id){
         BookDto bookDto = bookService.queryBookAndTag(id);
         return R.success(bookDto);
     }
+
+    /**
+     * 添加书本和标签信息
+     * @param bookDto
+     * @return
+     */
+    @PostMapping
+    public R addBook(@RequestBody BookDto bookDto){
+        bookService.addWithTags(bookDto);
+        return R.success("添加成功");
+    }
+
+
+    /**
+     * 根据传回的Dto，调用 update方法，进行修改
+     * @param bookDto
+     * @return
+     */
+    @PutMapping
+    public R updateBook(@RequestBody BookDto bookDto){
+        log.info(bookDto.toString());
+        bookService.updateWithTags(bookDto);
+        return R.success("修改成功");
+    }
+
+    /**
+     * 书籍收回
+     * @param ids
+     * @return
+     */
+    @PostMapping("/status/1")
+    public R<String> statusOn(String ids){
+
+        List<Long> idArray = Arrays.asList(ids.split(",")).stream().map((item) ->{
+            Long id = Long.valueOf(item);
+            return id;
+        }).collect(Collectors.toList());
+        for (Long id : idArray) {
+            Book book = bookService.getById(id);
+            book.setStatus(1);
+            bookService.updateById(book);
+        }
+        return R.success("收回成功");
+    }
+
+    /**
+     * 书籍借出
+     * @param ids
+     * @return
+     */
+    @PostMapping("/status/0")
+    public R<String> statusOff(String ids){
+
+        //ids用逗号分隔开，得到String数组，转成List后，使用stream，把String转化成Long，再封装为又给Long的List
+        List<Long> idArray = Arrays.asList(ids.split(",")).stream().map((item) ->{
+            Long id =  Long.valueOf(item);
+            return id;
+        }).collect(Collectors.toList());
+
+
+        //逐个修改id对应的菜品的状态
+        for (Long id : idArray) {
+            Book book = bookService.getById(id);
+            book.setStatus(0);
+            bookService.updateById(book);
+
+        }
+        return R.success("借出成功");
+    }
+
+
 }

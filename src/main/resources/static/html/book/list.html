@@ -30,8 +30,8 @@
         </el-input>
         <div class="tableLab">
           <span class="span-btn delBut non" @click="deleteHandle('批量', null)">批量删除</span>
-          <span class="span-btn blueBug non" @click="statusHandle('1')">批量借出</span>
-          <span style="border:none;" class="span-btn delBut non" @click="statusHandle('0')">批量收回</span>
+          <span class="span-btn blueBug non" @click="statusHandle('0')">批量借出</span>
+          <span style="border:none;" class="span-btn delBut non" @click="statusHandle('1')">批量收回</span>
           <el-button
             type="primary"
             @click="addBooktype('add')"
@@ -76,7 +76,7 @@
         </el-table-column>
         <el-table-column label="借阅状态">
           <template slot-scope="scope">
-            <span style="margin-right: 10px;">{{ scope.row.status == '0' ? '在藏' : '借出' }}</span>
+            <span style="margin-right: 10px;">{{ scope.row.status == '1' ? '在馆' : '借出' }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -104,7 +104,7 @@
               class="blueBug"
               @click="statusHandle(scope.row)"
             >
-              {{ scope.row.status == '0' ? '已预约' : '借出' }}
+              {{ scope.row.status == '1' ? '借出' : '收回' }}
             </el-button>
             <el-button
               type="text"
